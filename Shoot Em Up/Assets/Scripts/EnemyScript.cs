@@ -25,6 +25,15 @@ public class EnemyScript : MonoBehaviour {
 		rb.AddForce(new Vector2(xSpeed, ySpeed*-1));
 	}
 
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+		TakeDamage(1);
+		if (collision.gameObject.tag.Equals("Player"))
+		{
+			collision.gameObject.GetComponent<PlayerScript>().TakeDamage(1);
+		}
+	}
+
 	public void TakeDamage(int damage)
 	{
 		health = health - damage;
