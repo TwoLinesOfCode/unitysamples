@@ -8,6 +8,8 @@ public class EnemyScript : MonoBehaviour {
 	public bool canShoot;
 	public float fireRate;
 	public float health;
+
+	object bullet;
 	Rigidbody2D rb;
 
 	void Awake()
@@ -17,7 +19,11 @@ public class EnemyScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		if (canShoot)
+		{
+			bullet = Resources.Load("Prefabs/Bullet");
+			InvokeRepeating("Shoot", 1, fireRate);
+		}
 	}
 	
 	// Update is called once per frame
@@ -39,6 +45,14 @@ public class EnemyScript : MonoBehaviour {
 	{
 		health = health - damage;
 		if(health == 0) { Die(); }
+
+	}
+
+	private void Shoot()
+	{
+		var bulletSpawnPos = gameObject.transform.position;
+		bulletSpawnPos.y -= 15;
+		Instantiate((GameObject)bullet, bulletSpawnPos, Quaternion.identity).GetComponent<BulletScript>().shootDown = true;
 
 	}
 

@@ -6,12 +6,14 @@ public class GameManager : MonoBehaviour {
 
 	public int spawnRate;
 	public float spawnWidthOffset, spawnHeightOffset;
-	object enemy;
+	List<object> enemy;
 	float spawnWidth, spawnHeight;
 
 	// Use this for initialization
 	void Start () {
-		enemy = Resources.Load("Prefabs/Enemy");
+		enemy = new List<object>();
+		enemy.Add(Resources.Load("Prefabs/Enemy"));
+		enemy.Add(Resources.Load("Prefabs/shootingEnemy"));
 		var _camera = FindObjectOfType<Camera>();
 		spawnHeight = _camera.orthographicSize  + spawnHeightOffset;
 		spawnWidth = (_camera.orthographicSize * _camera.aspect) - spawnWidthOffset;
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour {
 	
 	void SpawnEnemy()
 	{
-		Instantiate((GameObject)enemy, new Vector3(Random.Range(spawnWidth * -1, spawnWidth), spawnHeight), Quaternion.identity);
+		var temp = Random.Range(0, enemy.Count);
+		Instantiate((GameObject)enemy[temp], new Vector3(Random.Range(spawnWidth * -1, spawnWidth), spawnHeight), Quaternion.identity);
 	}
 }

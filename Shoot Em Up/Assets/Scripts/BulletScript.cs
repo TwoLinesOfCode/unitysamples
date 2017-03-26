@@ -34,9 +34,9 @@ public class BulletScript : MonoBehaviour {
 			case "Enemy":
 				collidedWith.GetComponent<EnemyScript>().TakeDamage(damage);
 				break;
-			//case "Player":
-			//	collidedWith.GetComponent<PlayerScript>().TakeDamage(damage);
-			//	break;
+			case "Player":
+				collidedWith.GetComponent<PlayerScript>().TakeDamage(damage);
+				break;
 		}
 	}
 }

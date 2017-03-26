@@ -7,6 +7,7 @@ public class PlayerScript: MonoBehaviour {
 	public float speed;
 	public int health;
 	public GameObject bullet;
+	public float bulletSpawnOffset;
 
 	Rigidbody2D rb;
 	int firingCounter = 0;
@@ -25,7 +26,7 @@ public class PlayerScript: MonoBehaviour {
 	void Update () {
 		rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * speed, 0));
 
-		if (Input.GetKey(KeyCode.Mouse0))
+		if (Input.GetKey(KeyCode.Space))
 		{
 			if(bullet.GetComponent<BulletScript>().fireRateDelay < firingCounter)
 			{
@@ -38,14 +39,18 @@ public class PlayerScript: MonoBehaviour {
 
 	public void TakeDamage(int damage)
 	{
+		Debug.Log("i got hit!");
 		health = health - damage;
 		if (health == 0) { Die(); }
 
 	}
 
 	private void Shoot()
+
 	{
-		Instantiate(bullet, gameObject.transform.position, Quaternion.identity);
+		var bulletSpawnPos = gameObject.transform.position;
+		bulletSpawnPos.y += bulletSpawnOffset;
+		Instantiate(bullet, bulletSpawnPos, Quaternion.identity);
 		
 	}
 
