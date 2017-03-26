@@ -9,7 +9,6 @@ public class BoundTrigger : MonoBehaviour
 	{
 		if (coll.gameObject.tag == "playerTag")
 		{
-			Debug.Log(coll.gameObject.transform.position);
 			var pos = coll.gameObject.transform.position;
 			var offset = 0.5 * (pos.y > 0 ? 1 : -1);
 			pos.y = (pos.y * -1)+ (float)offset;

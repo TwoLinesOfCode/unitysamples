@@ -14,11 +14,12 @@ public class GameManager : MonoBehaviour
 	int shake = 4;
 	int delay = 10;
 	int counter = 0;
+	bool dohazard = false;
 
 	void Awake()
 	{
 		position = new Vector3(0, 0, 0);
-		InvokeRepeating("NewShip", 2, 2);
+		//InvokeRepeating("NewShip", 2, 2);
 		InvokeRepeating("SimulateBuzz", 5, 5);
 	}
 
@@ -37,12 +38,31 @@ public class GameManager : MonoBehaviour
 			if (isBuzz)
 			{
 				//var cam = gameObject.GetComponent<Camera>();
-				ourcrmera.transform.Rotate(0, 0, shake);
-				shake *= -1;
+				//ourcrmera.transform.Rotate(0, 0, shake);
+				//shake *= -1;
 			}
+		}
+		hazard();
+		if (Input.GetKeyDown(KeyCode.Q))
+		{
+			dohazard = true;
 		}
 	}
 
+	int hazardController = 0;
+	float hazardOffset = 0.2f;
+	void hazard()
+	{
+		if (!dohazard) return;
+		hazardController++;
+		if (hazardController > 20) { dohazard = false; hazardController = 0; return; }
+		if(hazardController%5==0)
+		{
+			ourcrmera.transform.Translate(hazardOffset, 0, 0);
+			hazardOffset *= -1;
+		}
+		
+	}
 
 	void SimulateBuzz()
 	{
