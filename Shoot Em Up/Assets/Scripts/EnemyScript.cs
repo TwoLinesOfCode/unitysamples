@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour {
 
 	public float ySpeed;
-	public bool canShoot;
 	public float fireRate;
 	public float health;
+	public bool canShoot;
 
 	object bullet;
 	Rigidbody2D rb;

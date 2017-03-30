@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Interface;
+using System;
 
 public class PlayerScript: MonoBehaviour {
 
@@ -17,11 +19,6 @@ public class PlayerScript: MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 	}
 
-	// Use this for initialization
-	void Start () {
-
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * speed, 0));
@@ -50,8 +47,15 @@ public class PlayerScript: MonoBehaviour {
 	{
 		var bulletSpawnPos = gameObject.transform.position;
 		bulletSpawnPos.y += bulletSpawnOffset;
-		Instantiate(bullet, bulletSpawnPos, Quaternion.identity);
+		var x = Instantiate(bullet, bulletSpawnPos, Quaternion.identity);
+		var script = x.GetComponent<BulletScript>();
+		script.Powered += Script_Powered;
 		
+	}
+
+	private void Script_Powered(PowerUpTypes POType)
+	{
+		Debug.Log("power up! of type " + Enum.GetName(typeof(PowerUpTypes), POType));
 	}
 
 	private void Die()

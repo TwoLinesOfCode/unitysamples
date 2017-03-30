@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Interface;
 
 public class BulletScript : MonoBehaviour {
 
@@ -8,6 +9,8 @@ public class BulletScript : MonoBehaviour {
 	public float speed;
 	public bool shootDown;
 	public int fireRateDelay;
+	public event PowerUp Powered;
+
 	int dir = 1;
 	Rigidbody2D rb;
 
@@ -37,6 +40,17 @@ public class BulletScript : MonoBehaviour {
 			case "Player":
 				collidedWith.GetComponent<PlayerScript>().TakeDamage(damage);
 				break;
+			case "PowerUp":
+				OnPowerUp(collidedWith.GetComponent<PowerUpScript>().type);
+				break;
+		}
+	}
+
+	void OnPowerUp(PowerUpTypes type)
+	{
+		if (Powered != null)
+		{
+			Powered(type);
 		}
 	}
 }
