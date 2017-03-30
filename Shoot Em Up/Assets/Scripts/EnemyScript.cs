@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour {
 
-	public float xSpeed, ySpeed;
-	public bool canShoot;
+	public float ySpeed;
 	public float fireRate;
 	public float health;
+	public bool canShoot;
+
+	object bullet;
 	Rigidbody2D rb;
 
 	void Awake()
@@ -17,18 +19,40 @@ public class EnemyScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		if (canShoot)
+		{
+			bullet = Resources.Load("Prefabs/Bullet");
+			InvokeRepeating("Shoot", 1, fireRate);
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		rb.AddForce(new Vector2(xSpeed, ySpeed*-1));
+		rb.velocity = new Vector2(0, ySpeed*-1);
+	}
+
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+		TakeDamage(1);
+		Debug.Log("enemy hit something");
+		if (collision.gameObject.tag.Equals("Player"))
+		{
+			collision.gameObject.GetComponent<PlayerScript>().TakeDamage(1);
+		}
 	}
 
 	public void TakeDamage(int damage)
 	{
 		health = health - damage;
 		if(health == 0) { Die(); }
+
+	}
+
+	private void Shoot()
+	{
+		var bulletSpawnPos = gameObject.transform.position;
+		bulletSpawnPos.y -= 15;
+		Instantiate((GameObject)bullet, bulletSpawnPos, Quaternion.identity).GetComponent<BulletScript>().shootDown = true;
 
 	}
 
