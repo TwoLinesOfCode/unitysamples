@@ -8,7 +8,7 @@ public class PlayerScript: MonoBehaviour {
 
 	public float speed;
 	public int health;
-	public GameObject bullet;
+	GameObject bullet;
 	public float bulletSpawnOffset;
 
 	Rigidbody2D rb;
@@ -17,6 +17,7 @@ public class PlayerScript: MonoBehaviour {
 	void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		bullet = Resources.Load<GameObject>("Prefabs/Bullet");
 	}
 
 	// Update is called once per frame
@@ -25,7 +26,7 @@ public class PlayerScript: MonoBehaviour {
 
 		if (Input.GetKey(KeyCode.Space))
 		{
-			if(bullet.GetComponent<BulletScript>().fireRateDelay < firingCounter)
+			if (bullet.GetComponent<BulletDataScript>().fireRateDelay < firingCounter)
 			{
 				Shoot();
 				firingCounter = 0;
@@ -48,14 +49,15 @@ public class PlayerScript: MonoBehaviour {
 		var bulletSpawnPos = gameObject.transform.position;
 		bulletSpawnPos.y += bulletSpawnOffset;
 		var x = Instantiate(bullet, bulletSpawnPos, Quaternion.identity);
-		var script = x.GetComponent<BulletScript>();
-		script.Powered += Script_Powered;
+		var script = x.GetComponent<BulletDataScript>();
+		script.Powered += Script_OnPowerUp;
 		
 	}
 
-	private void Script_Powered(PowerUpTypes POType)
+	private void Script_OnPowerUp(PowerUpTypes POType)
 	{
 		Debug.Log("power up! of type " + Enum.GetName(typeof(PowerUpTypes), POType));
+		bullet = Resources.Load<GameObject>("Prefabs/TripleShotBullet");
 	}
 
 	private void Die()

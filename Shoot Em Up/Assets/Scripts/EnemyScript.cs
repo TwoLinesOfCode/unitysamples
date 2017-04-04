@@ -52,7 +52,7 @@ public class EnemyScript : MonoBehaviour {
 	{
 		var bulletSpawnPos = gameObject.transform.position;
 		bulletSpawnPos.y -= 15;
-		Instantiate((GameObject)bullet, bulletSpawnPos, Quaternion.identity).GetComponent<BulletScript>().shootDown = true;
+		Instantiate((GameObject)bullet, bulletSpawnPos, Quaternion.identity).GetComponent<BulletDataScript>().shootDown = true;
 
 	}
 

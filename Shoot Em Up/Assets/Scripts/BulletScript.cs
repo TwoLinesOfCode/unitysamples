@@ -5,28 +5,24 @@ using Assets.Scripts.Interface;
 
 public class BulletScript : MonoBehaviour {
 
-	public int damage;
-	public float speed;
-	public bool shootDown;
-	public int fireRateDelay;
-	public event PowerUp Powered;
-
 	int dir = 1;
 	Rigidbody2D rb;
+	BulletDataScript props;
 
 	private void Awake()
 	{
+		props = GetComponent<BulletDataScript>();
 		rb = GetComponent<Rigidbody2D>();
 	}
 
 	// Use this for initialization
 	void Start () {
-		if (shootDown) { dir = -1; }
+		if (props.shootDown) { dir = -1; }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		rb.velocity = new Vector2(0, speed*dir);
+		rb.velocity = transform.up * props.speed * dir;
 	}
 
 	void OnTriggerEnter2D(Collider2D collision)
@@ -35,22 +31,14 @@ public class BulletScript : MonoBehaviour {
 		switch (collidedWith.tag)
 		{
 			case "Enemy":
-				collidedWith.GetComponent<EnemyScript>().TakeDamage(damage);
+				collidedWith.GetComponent<EnemyScript>().TakeDamage(props.damage);
 				break;
 			case "Player":
-				collidedWith.GetComponent<PlayerScript>().TakeDamage(damage);
+				collidedWith.GetComponent<PlayerScript>().TakeDamage(props.damage);
 				break;
 			case "PowerUp":
-				OnPowerUp(collidedWith.GetComponent<PowerUpScript>().type);
+				props.OnPowerUp(collidedWith.GetComponent<PowerUpScript>().type);
 				break;
-		}
-	}
-
-	void OnPowerUp(PowerUpTypes type)
-	{
-		if (Powered != null)
-		{
-			Powered(type);
 		}
 	}
 }

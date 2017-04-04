@@ -4,7 +4,7 @@ using UnityEngine;
 using Assets.Scripts.Interface;
 using System;
 
-public class PowerUpScript : MonoBehaviour, IPowerUp {
+public class PowerUpScript : MonoBehaviour {
 
 	public PowerUpTypes type
 	{
