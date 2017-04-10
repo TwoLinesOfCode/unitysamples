@@ -1,33 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Reflection;
-using System.Text;
-//using Microsoft.CSharp;
-//using System.CodeDom.Compiler;
+using Assets.Scripts.Enum;
+using UnityEngine.Events;
 
-public class TripleShotBulletScript : MonoBehaviour
-{
+public class SingleShotBulletScript : MonoBehaviour {
 
-	//private void Awake()
-	//{
-	//	var props = GetComponent<BulletDataScript>();
-	//	//var target = new BulletDataScript();
-	//	//FieldInfo[] fields = props.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
-	//	//foreach (var field in fields)
-	//	//{
-	//	//	field.GetValue(target);
-	//	//}
+	private void Awake()
+	{
+		//props = GetComponent<BulletDataScript>();
+		//var child = transform.GetChild(0).gameObject;
+		//child.AddComponent<BulletDataScript>();
+		//copyStuffOver(props, child.GetComponent<BulletDataScript>());
 
-	//	for (int i = 0; i < gameObject.transform.childCount; i++)
-	//	{
-	//		var child = transform.GetChild(i).gameObject;
-	//		child.AddComponent<BulletDataScript>();
-	//		copyStuffOver(props, child.GetComponent<BulletDataScript>());
-	//	}
-	//}
+		//child.GetComponent<ProjectileScript>().PowerUp += props.OnPowerUp;
 
-	// Update is called once per frame
+	}
+
+	void Start () {
+
+	}
+
 	void Update()
 	{
 		if (transform.childCount == 0)
@@ -53,4 +46,5 @@ public class TripleShotBulletScript : MonoBehaviour
 	//	target.fireRateDelay = source.fireRateDelay;
 	//	target.damage = source.damage;
 	//}
+
 }

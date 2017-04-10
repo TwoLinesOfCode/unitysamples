@@ -1,32 +1,26 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Enum;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.Enum;
-using UnityEngine.Events;
 
-public class BulletScript : MonoBehaviour {
+public class ProjectileScript : MonoBehaviour {
 
-	int dir = 1;
-	Rigidbody2D rb;
 	BulletDataScript props;
-	AudioSource audioSource;
+	Rigidbody2D rb;
+	int dir = 1;
 
 	private void Awake()
 	{
-		props = GetComponent<BulletDataScript>();
+		props = GetComponentInParent<BulletDataScript>();
 		rb = GetComponent<Rigidbody2D>();
-		audioSource = gameObject.AddComponent<AudioSource>();
-		audioSource.clip = props.firingSound;
 	}
-
 	// Use this for initialization
 	void Start () {
 		if (props.shootDown) { dir = -1; }
-		audioSource.Play();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	void Update()
+	{
 		rb.velocity = transform.up * props.speed * dir;
 	}
 
@@ -45,8 +39,6 @@ public class BulletScript : MonoBehaviour {
 				props.OnPowerUp(collidedWith.GetComponent<PowerUpScript>().type);
 				break;
 		}
-		 
+
 	}
-	
-	
 }

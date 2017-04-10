@@ -21,7 +21,7 @@ public class EnemyScript : MonoBehaviour {
 	void Start () {
 		if (canShoot)
 		{
-			bullet = Resources.Load("Prefabs/Bullet");
+			bullet = Resources.Load("Prefabs/SingleShotBullet");
 			InvokeRepeating("Shoot", 1, fireRate);
 		}
 	}

@@ -17,7 +17,7 @@ public class PlayerScript: MonoBehaviour {
 	void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		bullet = Resources.Load<GameObject>("Prefabs/Bullet");
+		bullet = Resources.Load<GameObject>("Prefabs/SingleShotBullet");
 	}
 
 	// Update is called once per frame
@@ -44,14 +44,12 @@ public class PlayerScript: MonoBehaviour {
 	}
 
 	private void Shoot()
-
 	{
 		var bulletSpawnPos = gameObject.transform.position;
 		bulletSpawnPos.y += bulletSpawnOffset;
 		var x = Instantiate(bullet, bulletSpawnPos, Quaternion.identity);
 		var script = x.GetComponent<BulletDataScript>();
 		script.Powered += Script_OnPowerUp;
-		
 	}
 
 	private void Script_OnPowerUp(PowerUpTypes POType)

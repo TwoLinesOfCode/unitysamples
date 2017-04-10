@@ -9,8 +9,7 @@ public class BulletDataScript : MonoBehaviour {
 	public float speed;
 	public bool shootDown;
 	public int fireRateDelay;
-	public AudioClip firingSound;
-	public event PowerUpScript.PowerUp Powered;
+	public event PowerUpScript.PowerUpDelegate Powered;
 
 	public void OnPowerUp(PowerUpTypes type)
 	{

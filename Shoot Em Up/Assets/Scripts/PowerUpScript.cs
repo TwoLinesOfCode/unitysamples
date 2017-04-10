@@ -14,6 +14,5 @@ public class PowerUpScript : MonoBehaviour {
 		}
 
 	}
-
-	public delegate void PowerUp(PowerUpTypes powerUp);
+	public delegate void PowerUpDelegate(PowerUpTypes type);
 }
