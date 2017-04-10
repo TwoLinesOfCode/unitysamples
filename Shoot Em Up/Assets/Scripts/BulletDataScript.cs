@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.Interface;
+using Assets.Scripts.Enum;
 
 public class BulletDataScript : MonoBehaviour {
 
@@ -9,7 +9,8 @@ public class BulletDataScript : MonoBehaviour {
 	public float speed;
 	public bool shootDown;
 	public int fireRateDelay;
-	public event PowerUp Powered;
+	public AudioClip firingSound;
+	public event PowerUpScript.PowerUp Powered;
 
 	public void OnPowerUp(PowerUpTypes type)
 	{

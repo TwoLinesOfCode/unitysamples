@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.Interface;
+using Assets.Scripts.Enum;
 using System;
 
 public class PowerUpScript : MonoBehaviour {
@@ -14,6 +14,6 @@ public class PowerUpScript : MonoBehaviour {
 		}
 
 	}
-}
 
-public delegate void PowerUp(PowerUpTypes powerUp);
+	public delegate void PowerUp(PowerUpTypes powerUp);
+}

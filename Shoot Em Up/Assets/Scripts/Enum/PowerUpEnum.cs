@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Assets.Scripts.Interface
+namespace Assets.Scripts.Enum
 {
 	public enum PowerUpTypes
 	{

@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts.Interface;
 using System;
+using Assets.Scripts.Enum;
 
 public class PlayerScript: MonoBehaviour {
 
