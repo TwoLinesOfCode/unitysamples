@@ -17,7 +17,11 @@ public class GameManager : MonoBehaviour {
 		var _camera = FindObjectOfType<Camera>();
 		spawnHeight = _camera.orthographicSize  + spawnHeightOffset;
 		spawnWidth = (_camera.orthographicSize * _camera.aspect) - spawnWidthOffset;
-		InvokeRepeating("SpawnEnemy", 2, spawnRate);
+		InvokeRepeating("SpawnEnemy", 7, spawnRate);
+		AudioSource music = gameObject.AddComponent<AudioSource>();
+		music.clip = Resources.Load<AudioClip>("Sounds/Chipzel - Otis");
+		music.volume = 0.15f;
+		music.Play();
 	}
 	
 	void SpawnEnemy()

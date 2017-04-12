@@ -39,6 +39,7 @@ public class ProjectileScript : MonoBehaviour {
 				props.OnPowerUp(collidedWith.GetComponent<PowerUpScript>().type);
 				break;
 		}
+		Destroy(gameObject);
 
 	}
 }

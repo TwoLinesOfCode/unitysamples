@@ -58,6 +58,8 @@ public class EnemyScript : MonoBehaviour {
 
 	private void Die()
 	{
-		Destroy(gameObject);
+		GetComponent<AudioSource>().Play();
+		GetComponent<Renderer>().enabled = false;
+		Destroy(gameObject, 0.5f	);
 	}
 }
