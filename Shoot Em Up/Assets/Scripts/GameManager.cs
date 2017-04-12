@@ -22,10 +22,9 @@ public class GameManager : MonoBehaviour {
 		spawnHeight = Camera.main.orthographicSize  + spawnHeightOffset;
 		spawnWidth = (Camera.main.orthographicSize * Camera.main.aspect) - spawnWidthOffset;
 
-		InvokeRepeating("ChangeBGColor", 30, 0.1f);
-
 		InvokeRepeating("SpawnEnemy", 7, spawnRate);
 
+		InvokeRepeating("ChangeBGColor", 35, 0.1f);
 
 		AudioSource music = gameObject.AddComponent<AudioSource>();
 		music.clip = Resources.Load<AudioClip>("Sounds/Chipzel - Otis");
