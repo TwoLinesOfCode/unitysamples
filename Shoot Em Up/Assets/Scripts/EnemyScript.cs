@@ -34,7 +34,7 @@ public class EnemyScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		TakeDamage(1);
-		Debug.Log("enemy hit something");
+		Debug.Log("enemy hit " + collision.gameObject.name);
 		if (collision.gameObject.tag.Equals("Player"))
 		{
 			collision.gameObject.GetComponent<PlayerScript>().TakeDamage(1);
@@ -51,7 +51,7 @@ public class EnemyScript : MonoBehaviour {
 	private void Shoot()
 	{
 		var bulletSpawnPos = gameObject.transform.position;
-		bulletSpawnPos.y -= 15;
+		bulletSpawnPos.y -= 1.5f;
 		Instantiate((GameObject)bullet, bulletSpawnPos, Quaternion.identity).GetComponent<BulletDataScript>().shootDown = true;
 
 	}
