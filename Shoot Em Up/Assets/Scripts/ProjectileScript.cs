@@ -14,7 +14,7 @@ public class ProjectileScript : MonoBehaviour {
 		props = GetComponentInParent<BulletDataScript>();
 		rb = GetComponent<Rigidbody2D>();
 	}
-	// Use this for initialization
+
 	void Start () {
 		if (props.shootDown) { dir = -1; }
 	}

@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		Color lerpedColor = Camera.main.backgroundColor;
-		lerpedColor = Color.Lerp(Camera.main.backgroundColor, new Color(0.1f, 0.2f, 0.3f), t);
+		lerpedColor = Color.Lerp(Camera.main.backgroundColor, new Color(0.35f, 0.2f, 0.2f), t);
 		t += Time.deltaTime / duration;
 		Camera.main.backgroundColor = lerpedColor; 
 	}

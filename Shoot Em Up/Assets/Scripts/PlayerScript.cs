@@ -13,25 +13,35 @@ public class PlayerScript: MonoBehaviour {
 
 	Rigidbody2D rb;
 	int firingCounter = 0;
+	int bulletFireRateDelay;
 
 	void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		bullet = Resources.Load<GameObject>("Prefabs/SingleShotBullet");
+		LoadBullet("SingleShotBullet");
 	}
 
-	// Update is called once per frame
 	void Update () {
 		rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * speed, 0));
 
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			Shoot();
+		}
+
 		if (Input.GetKey(KeyCode.Space))
 		{
-			if (bullet.GetComponent<BulletDataScript>().fireRateDelay < firingCounter)
+			if (bulletFireRateDelay < firingCounter)
 			{
 				Shoot();
 				firingCounter = 0;
 			}
 			firingCounter++;
+		}
+
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
+			firingCounter = 0;
 		}
 	}
 
@@ -55,7 +65,14 @@ public class PlayerScript: MonoBehaviour {
 	private void Script_OnPowerUp(PowerUpTypes POType)
 	{
 		Debug.Log("power up! of type " + Enum.GetName(typeof(PowerUpTypes), POType));
-		bullet = Resources.Load<GameObject>("Prefabs/TripleShotBullet");
+		LoadBullet("TripleShotBullet");
+		
+	}
+
+	void LoadBullet(string bulletName)
+	{
+		bullet = Resources.Load<GameObject>("Prefabs/"+bulletName);
+		bulletFireRateDelay = bullet.GetComponent<BulletDataScript>().fireRateDelay;
 	}
 
 	private void Die()
